@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 12:07:36 by mpoplow           #+#    #+#             */
-/*   Updated: 2024/12/11 16:14:30 by mpoplow          ###   ########.fr       */
+/*   Created: 2024/10/23 12:16:42 by mpoplow           #+#    #+#             */
+/*   Updated: 2024/12/12 16:00:28 by mpoplow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+// exactly like ft_strjoin, but frees s1 before returning.
+char	*ft_strjoin_free(char *s1, char const *s2)
 {
-	int	i;
+	size_t	i;
+	size_t	s1len;
+	char	*dest;
 
+	s1len = ft_strlen(s1);
+	dest = malloc(s1len + ft_strlen(s2) + 1);
+	if (!dest)
+		return (NULL);
+	if (!s1)
+		return ((char *)s2);
 	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
+	while (s1[i])
 	{
-		write(fd, &s[i], 1);
+		dest[i] = s1[i];
 		i++;
 	}
+	i = 0;
+	while (s2[i])
+	{
+		dest[s1len + i] = s2[i];
+		i++;
+	}
+	dest[s1len + i] = '\0';
+	free(s1);
+	return (dest);
 }
