@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strstrdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 17:44:49 by mpoplow           #+#    #+#             */
-/*   Updated: 2025/01/03 15:30:19 by mpoplow          ###   ########.fr       */
+/*   Created: 2024/10/22 15:10:03 by mpoplow           #+#    #+#             */
+/*   Updated: 2025/01/03 15:30:49 by mpoplow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t destsize)
+char	**ft_strstrdup(const char **src)
 {
+	char	**dest;
 	size_t	i;
-	size_t	slen;
-	size_t	dlen;
 
-	dlen = ft_strlen(dest);
-	slen = ft_strlen(src);
 	i = 0;
-	if (destsize == 0 || (destsize <= dlen))
-		return (destsize + slen);
-	while (i < ((destsize - dlen) - 1) && src[i])
+	while (src[i] != NULL)
+		i++;
+	dest = malloc((i + 1) * sizeof(char *));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (src[i] != NULL && src != NULL)
 	{
-		dest[dlen + i] = src[i];
+		dest[i] = ft_strdup((const char *)src[i]);
+		if (!dest[i])
+		{
+			while (i > 0)
+				free(dest[--i]);
+			free(dest);
+			return (NULL);
+		}
 		i++;
 	}
-	dest[dlen + i] = '\0';
-	return (dlen + slen);
+	dest[i] = NULL;
+	return (dest);
 }

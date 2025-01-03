@@ -6,7 +6,7 @@
 /*   By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 20:35:04 by mpoplow           #+#    #+#             */
-/*   Updated: 2024/12/12 15:58:33 by mpoplow          ###   ########.fr       */
+/*   Updated: 2024/12/17 17:49:01 by mpoplow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *src);
+char	**ft_strstrdup(const char **src);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin_free(char *s1, char const *s2);
@@ -75,4 +76,8 @@ int		move(char statarr[]);
 int		nlcheck(char *str, char *statarr);
 int		setstat(int fd, char *statarr);
 char	*readerror(int x, char *endstr);
+char	*ft_text_strjoin(char *endstr, char *stat);
+char	*text_readerror(char *endstr);
+char	*get_next_text(int fd);
+
 #endif
