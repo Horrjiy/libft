@@ -26,10 +26,7 @@ static int	ft_putnbr_hex(unsigned int n, int *wrc)
 {
 	unsigned long	cast;
 
-	if (n < 0)
-		cast = (unsigned long)(-n);
-	else
-		cast = (unsigned long)n;
+	cast = (unsigned long)n;
 	if (cast == 0)
 	{
 		if (write(1, "0", 1) == -1)

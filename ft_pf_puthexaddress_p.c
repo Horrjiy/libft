@@ -34,12 +34,6 @@ static int	ft_putnbr_ad(uintptr_t n, int *wrc)
 {
 	if (n == 0)
 		return (edgecase(wrc));
-	if (n < 0)
-	{
-		n = -n;
-		if (write(1, "-", 1) == -1)
-			return (-1);
-	}
 	if (n >= 16)
 		ft_putnbr_ad((n / 16), wrc);
 	(*wrc)++;
