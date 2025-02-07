@@ -6,11 +6,9 @@
 #    By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 20:46:28 by mpoplow           #+#    #+#              #
-#    Updated: 2025/01/03 15:27:22 by mpoplow          ###   ########.fr        #
+#    Updated: 2025/02/07 17:14:43 by mpoplow          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-.SILENT:
 
 NAME = libft.a
 
@@ -25,19 +23,20 @@ CFILES = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 			ft_calloc.c ft_strdup.c ft_strstrdup.c\
 			ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strjoin_free.c\
 			ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-			ft_printf.c \
-			ft_pf_putstrchar_sc_perc.c \
-			ft_pf_putnbr_di.c ft_pf_putunbr_u.c \
-			ft_pf_puthex_lowx.c ft_pf_puthex_capx.c ft_pf_puthexaddress_p.c \
-			get_next_line.c get_next_line_utils.c \
-			get_next_text.c \
+			ft_printf/ft_printf.c \
+			ft_printf/ft_pf_putstrchar_sc_perc.c \
+			ft_printf/ft_pf_putnbr_di.c ft_printf/ft_pf_putunbr_u.c \
+			ft_printf/ft_pf_puthex_lowx.c ft_printf/ft_pf_puthex_capx.c ft_printf/ft_pf_puthexaddress_p.c \
+			gnl/get_next_line.c gnl/get_next_line_utils.c \
+			gnl/get_next_text.c \
 
-OFILES = $(CFILES:.c=.o)
-DFILES = $(CFILES:.c=.d)
+# OFILES	= $(addprefix OandD_FILES_LIBFT/, $(notdir $(CFILES:.c=.o)))
+# DFILES	= $(addprefix OandD_FILES_LIBFT/, $(notdir $(CFILES:.c=.d)))
+OFILES = $(CFILES:%.c=OandD_FILES_LIBFT/%.o)
+DFILES = $(CFILES:%.c=OandD_FILES_LIBFT/%.d)
+
+
 CFLAGS = -Wall -Wextra -Werror
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*	#
 # 	RULES																		#
@@ -45,11 +44,13 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
+OandD_FILES_LIBFT/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -MMD -MP -g -c $< -o $@
+
 $(NAME): $(OFILES)
 	@echo "\033[1;32mlibft: create libft.a\033[0m"
 	@ar rcs $(NAME) $(OFILES)
-	@mkdir -p OandD_FILES_LIBFT
-	@mv $(OFILES) $(DFILES) OandD_FILES_LIBFT
 
 clean:
 	@echo "\033[1;33mlibft: rm .o files\033[0m"
@@ -62,4 +63,5 @@ fclean: clean
 
 re: fclean all
 
+.SILENT: $(OFILES) $(DFILES)
 .PHONY:  all clean fclean re

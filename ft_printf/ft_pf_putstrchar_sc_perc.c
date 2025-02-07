@@ -1,53 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pf_puthex_capx.c                                :+:      :+:    :+:   */
+/*   ft_pf_putstrchar_sc_perc.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 15:12:54 by mpoplow           #+#    #+#             */
-/*   Updated: 2025/01/03 15:29:44 by mpoplow          ###   ########.fr       */
+/*   Created: 2024/11/08 14:01:32 by mpoplow           #+#    #+#             */
+/*   Updated: 2025/02/07 17:01:49 by mpoplow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-static int	ft_puthexc(unsigned int cast)
+int	cfound(char f, int *wrc)
 {
-	char	*str;
-
-	str = "0123456789ABCDEF";
-	if (write(1, &str[cast], 1) == -1)
+	if (write(1, &f, 1) == -1)
 		return (-1);
+	(*wrc)++;
 	return (0);
 }
 
-static int	ft_putnbr_hexc(unsigned int n, int *wrc)
+int	sfound(char *f, int *wrc)
 {
-	unsigned long	cast;
+	size_t	temp;
 
-	cast = (unsigned long)n;
-	if (cast == 0)
+	if (f == NULL)
 	{
-		if (write(1, "0", 1) == -1)
+		if (write(1, "(null)", 6) == -1)
 			return (-1);
-		(*wrc)++;
+		(*wrc) += 6;
 		return (0);
 	}
-	if (cast >= 16)
+	temp = 0;
+	while (f[temp])
 	{
-		if (ft_putnbr_hexc((cast / 16), wrc) == -1)
+		if (write(1, &f[temp], 1) == -1)
 			return (-1);
+		temp++;
+		(*wrc)++;
 	}
-	(*wrc)++;
-	if (ft_puthexc((cast % 16)) == -1)
-		return (-1);
 	return (0);
 }
 
-int	capxfound(int f, int *wrc)
+int	percfound(int *wrc)
 {
-	if (ft_putnbr_hexc(f, wrc) == -1)
+	if (write(1, "%%", 1) == -1)
 		return (-1);
+	(*wrc)++;
 	return (0);
 }

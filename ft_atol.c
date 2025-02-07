@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:33:43 by mpoplow           #+#    #+#             */
-/*   Updated: 2025/02/07 17:40:51 by mpoplow          ###   ########.fr       */
+/*   Updated: 2025/02/07 16:59:36 by mpoplow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+// like ft_atoi, but converts to long instead of int.
+long	ft_atol(const char *str)
 {
-	int	i;
-	int	number;
-	int	sign;
+	long	i;
+	long	number;
+	long	sign;
 
 	number = 0;
 	sign = 1;
@@ -37,16 +38,3 @@ int	ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int	main(void)
-// {
-// 	printf("%d; %d\n", ft_atoi("3"), atoi("3"));
-// 	printf("%d; %d\n", ft_atoi("                    7"),
-//			atoi("                    7"));
-// 	printf("%d; %d\n", ft_atoi("          123456789101112"),
-//			atoi("          123456789101112"));
-// 	return (0);
-// }
