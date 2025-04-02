@@ -6,37 +6,42 @@
 #    By: mpoplow <mpoplow@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 20:46:28 by mpoplow           #+#    #+#              #
-#    Updated: 2025/02/07 17:14:43 by mpoplow          ###   ########.fr        #
+#    Updated: 2025/04/02 15:41:44 by mpoplow          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME 	:= libft.a
+CC 		:= cc
+CFLAGS 	:= -Wall -Wextra -Werror
 
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*	#
 # 	FILES																		#
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*	#
 
-CFILES = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
-			ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-			ft_toupper.c ft_tolower.c \
-			ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
-			ft_calloc.c ft_strdup.c ft_strstrdup.c\
-			ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strjoin_free.c\
-			ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-			ft_printf/ft_printf.c \
-			ft_printf/ft_pf_putstrchar_sc_perc.c \
-			ft_printf/ft_pf_putnbr_di.c ft_printf/ft_pf_putunbr_u.c \
-			ft_printf/ft_pf_puthex_lowx.c ft_printf/ft_pf_puthex_capx.c ft_printf/ft_pf_puthexaddress_p.c \
-			gnl/get_next_line.c gnl/get_next_line_utils.c \
-			gnl/get_next_text.c \
+GNL		= $(addprefix $(GNL_DIR)/, get_next_line.c get_next_line_utils.c get_next_text.c )	
+PRINTF	= $(addprefix $(PRINTF_DIR)/, ft_pf_putstrchar_sc_perc.c ft_pf_putnbr_di.c ft_pf_putunbr_u.c ft_pf_puthex_lowx.c ft_pf_puthex_capx.c ft_pf_puthexaddress_p.c ft_printf.c )
+STRING	= $(addprefix $(STRING_DIR)/, ft_strjoin_free.c ft_strjoin.c ft_strlcpy.c ft_strlcat.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strnstr.c ft_strlen.c ft_strmapi.c ft_striteri.c ft_substr.c ft_strdup.c ft_strstrdup.c)
+MEM		= $(addprefix $(MEM_DIR)/, ft_bzero.c ft_calloc.c ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c )
+ISX		= $(addprefix $(ISX_DIR)/, ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_toupper.c ft_tolower.c )
+PUTX	= $(addprefix $(PUTX_DIR)/, ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c )
+CPLX	= $(addprefix $(CPLX_DIR)/, ft_atoi.c ft_split.c ft_itoa.c )
 
-# OFILES	= $(addprefix OandD_FILES_LIBFT/, $(notdir $(CFILES:.c=.o)))
-# DFILES	= $(addprefix OandD_FILES_LIBFT/, $(notdir $(CFILES:.c=.d)))
-OFILES = $(CFILES:%.c=OandD_FILES_LIBFT/%.o)
-DFILES = $(CFILES:%.c=OandD_FILES_LIBFT/%.d)
+CFILES	= $(STRING) $(GNL) $(PRINTF) $(MEM) $(ISX) $(PUTX) $(CPLX)
 
+OFILES	= $(CFILES:%.c=OandD_FILES_LIBFT/%.o)
+DFILES	= $(CFILES:%.c=OandD_FILES_LIBFT/%.d)
 
-CFLAGS = -Wall -Wextra -Werror
+# *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*	#
+# 	Directories																	#
+# *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*	#
+
+GNL_DIR 	:= gnl
+PRINTF_DIR 	:= ft_printf
+STRING_DIR	:= str_functions
+MEM_DIR		:= memory
+ISX_DIR		:= is_x
+PUTX_DIR	:= put_x
+CPLX_DIR	:= complex
 
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*	#
 # 	RULES																		#
